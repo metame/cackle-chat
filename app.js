@@ -1,72 +1,78 @@
 var express = require('express');
 var app = express();
-var server = require('http').createServer(app); // passes express app as listener for http server
-var io = require('socket.io')(server);  // socket.io & express are using same http server, i.e socket is listening on this server & as well as express
-var redis = require('redis');
-var redisClient = redis.createClient();
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
+var port = process.env.PORT || 3000;
 
-io.on('connection', function(client) {
-  console.log('Client connected...');
-
-  client.emit('messages', { hello: 'world' });
+server.listen(port, function() {
+  console.log('Server listening at port %d', port);
 });
-var messages = [];
-var storeMessage = function(name, data){
-  var message = JSON.stringify({name: name, data: data});
 
-  redisClient.lpush('messages', message, function(err, response){
-  redisClient.ltrim('messages', 0, 9);
+// Routing to set static dirname for all files in /public
+app.use(express.static(__dirname + '/public'));
+
+// Chatroom
+
+//username which are currently connected to the Chat
+var usernames = {};
+var numUsers = 0;
+
+io.on('connection', function(socket) {
+  var addedUser = false;
+
+  // when the client emits 'new message', this listens and executes
+  socket.on('new message', function (data) {
+    // we tell the client to execute 'new message'
+    socket.broadcast.emit('new message', {
+      username: socket.username,
+      message: data
+    });
   });
-}
 
-io.on('connection', function(client) {
+  // when the client emits 'new message', this listens and executes
+  socket.on('add user', function(username) {
+    // we store the username in the socket session for this client
+    socket.username = username;
+    // add the client's username to the global list
+    usernames[username] = username;
+    ++numUsers;
+    addedUser = true;
+    socket.emit('login', {
+      numUsers: numUsers
+    });
+    // echo globally (all clients) that a person has connected
+    socket.broadcast.emit('user joined', {
+      username: socket.username,
+      numUsers: numUsers
+    });
+  });
 
-  client.on('join', function(name) {
-    client.nickname = name; // make var available both on server & client
+  // when the client emits 'typing', we broadcast it to others
+  socket.on('typing', function () {
+    socket.broadcast.emit('typing', {
+      username: socket.username
+    });
+  });
 
-    client.broadcast.emit('add chatter', name);
+  // when the client emits "stop typing", we broadcast it to others
+  socket.on('stop typing', function() {
+    socket.broadcast.emit('stop typing', {
+      username: socket.username
+    });
+  });
 
-    // emit all the currently logged in chatters to the newly connected client
-    redisClient.smembers('names', function(err, names) {
-      names.forEach(function(name){
-        client.emit('add chatter', name);
+  // when the user disconnects, perform this
+  socket.on('disconnect', function() {
+    // remove the username from global usernames list
+    if (addedUser) {
+      delete usernames[socket.username];
+      --numUsers;
+
+      // echo globally that this client has left
+      socket.broadcast.emit('user left', {
+        username: socket.username,
+        numUsers: numUsers
       });
-    });
-
-    redisClient.sadd('chatters', name);
-
-    redisClient.lrange("messages", 0, -1, function(err, messages) {
-      messages = messages.reverse();
-
-      messages.forEach(function(message) {
-        message = JSON.parse(message); // parse into JSON object
-      client.emit('messages', message.name + ': ' + message.data);
-      });
-    });
-    
+    }
   });
-
-  
-
-  client.on('messages', function(data) {
-    var nickname = client.nickname; // get nickname of client before broadcasting msg
-    client.broadcast.emit('message', nickname + ': ' + message); // broadcast with name & msg
-    client.emit('messages', nickname + ': ' + message); // send same msg back to client, i.e. so client can see own msgs
-    storeMessage(name, message);
-  });
-
-  client.on('disconnect', function(){
-    client.get('nickname', function(err, name){
-      client.broadcast.emit('remove chatter', name);
-      redisClient.srem('chatters', name);
-    });
-  });
-});
-
-app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/index.html');
-});
-
-server.listen(8080, function(){
-  console.log('Server listening on port %d', 8080);
 });
