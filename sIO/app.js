@@ -29,7 +29,7 @@ io.on('connection', function(socket) {
     });
   });
 
-  // when the client emits 'new message', this listens and executes
+  // when the client emits 'add user', this listens and executes
   socket.on('add user', function(username) {
     // we store the username in the socket session for this client
     socket.username = username;
