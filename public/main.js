@@ -16,6 +16,7 @@ $(function() {
 
 	// Add user
 	var username;
+	var users = [];
 	var $currentInput = $usernInput.focus();
 
 	// Initial environment
@@ -24,6 +25,7 @@ $(function() {
 
 	function addUser () {
 		username = $usernInput.val().trim();
+		
 		if (username.length > 0) {
 			$userPage.fadeOut();
 			$chatPage.show();
@@ -41,6 +43,15 @@ $(function() {
 			$msgInput.val('');
 		}
 	}
+
+	// List users in User List
+	function listUsers () {
+		for (var i = 0; i < users.length; i++)
+			if (users[i] !== undefined) {
+				var userLi = '<li>' + users[i] + '</li>';
+				$userList.append(userLi);
+			}
+	}
 	
 	$('.userBtn').click( function (e) {
 		addUser();
@@ -53,16 +64,24 @@ $(function() {
 		e.preventDefault();
 	});
 
-	socket.on('user joined', function (username) {
-		var userLi = '<li>' + username + '</li>';
-		$userList.append(userLi);
-		var joinMsg = $('<li>').text(username + ' has joined');
+	socket.on('user joined', function (user) {
+		users.push(user);
+		listUsers();
+		var joinMsg = $('<li>').text(user + ' has joined');
 		$msgList.append(joinMsg);
 	});
 
 	socket.on('chat message', function (msg) {
 		var msgLi = '<li>' + username + ': ' + msg + '</li>';
 		$msgList.append(msgLi);
-	})
+	});
+
+	socket.on('user left', function (user) {
+		for (var i = 0; i < users.length; i++)
+			if(users[i] == user) {
+				users[i] = undefined;
+			}
+		listUsers();
+	});
 
 });
