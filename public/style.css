@@ -1,0 +1,18 @@
+.userPage {
+	height: 100%;
+	margin-top: 1%;
+}
+
+.chatPage {
+	height: 100%;
+	margin-top: 1%;
+	border: 1px solid;
+}
+
+#msgList {
+	margin-top: 1%;
+}
+
+#chatWindow, #divUserList, #chatInput {
+	border: 1px solid;
+}
