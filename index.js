@@ -32,13 +32,16 @@ io.on('connection', function(socket) {
 		console.log('There are now ' + numUsers + ' user(s) on the chat server');
 
 
-		socket.broadcast.emit('user joined', {
-			username: socket.username,
-			numUsers: numUsers
-		});
-		
-
+		io.emit('user joined', socket.username);
 	});
+
+	socket.on('chat message', function(msg) {
+		console.log('message: ' + msg);
+		// io.emit sends event to every client while socket.broadcast.emit except specific client
+		io.emit('chat message', msg);
+	});
+
+
 	socket.on('event', function(data){});
 	socket.on('disconnect', function(){
 		console.log( socket.username + ' has left');

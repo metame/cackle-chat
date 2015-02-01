@@ -24,34 +24,25 @@ $(function() {
 
 	function addUser () {
 		username = $usernInput.val().trim();
-		
-
 		if (username.length > 0) {
 			$userPage.fadeOut();
 			$chatPage.show();
 			$currentInput = $msgInput.focus();
-
-			// Will move this to socket.on('user joined') to broadcast
-			var userLi = '<li>' + username + '</li>';
-			$userList.append(userLi);
-
 			socket.emit('add user', username);
-
 		}
 	}
 
 	function addMsg () {
 		var message = $msgInput.val().trim();
-
-		if (message.length > 0 && username) {
-			var msgLi = '<li>' + username + ': ' + message + '</li>';
-			$msgList.append(msgLi);
+		if (!username) {
+			alert('Enter username first before sending a message!');
+		} else if (message.length > 0) {
+			socket.emit('chat message', message);
+			$msgInput.val('');
 		}
-		$msgInput.val('');
 	}
 	
 	$('.userBtn').click( function (e) {
-
 		addUser();
 		e.preventDefault();
 	});
@@ -62,8 +53,16 @@ $(function() {
 		e.preventDefault();
 	});
 
-	socket.on('user joined', function (data) {
-
+	socket.on('user joined', function (username) {
+		var userLi = '<li>' + username + '</li>';
+		$userList.append(userLi);
+		var joinMsg = $('<li>').text(username + ' has joined');
+		$msgList.append(joinMsg);
 	});
+
+	socket.on('chat message', function (msg) {
+		var msgLi = '<li>' + username + ': ' + msg + '</li>';
+		$msgList.append(msgLi);
+	})
 
 });

@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div class="container-fluid">
-		<div class="col-md-8 col-md-offset-2">
+		<div class="col-xs-12 col-md-8">
 			<div class="row userPage">
 				<form class="form-inline">
 				<input class="usernInput form-control" type="text" placeholder="username?" />
@@ -16,27 +16,28 @@
 				</form>
 			</div>
 			<div class="chatPage row">
-				<div id="divUserList" class="col-md-2">
+				<div id="divUserList" class="col-xs-12">
 					<h4>Chatters</h4>
 					<ul id="userList">
 						<li>meta</li>
 					</ul>
 				</div>
-				<div id="chatWindow" class="col-md-10">
+				<div id="chatWindow" class="col-xs-12">
 					<ul id="msgList">
 						<li>meta: Hello world!</li>
 					</ul>
 				</div>
-				<div id="chatInput" class="col-md-10">
+				<div id="chatInput" class="col-xs-12">
 					<form class="form-horizontal">
 						<input class="msgInput form-control" type="text" placeholder="message?" />
-						<button class="btn btn-default msgBtn"><span class="glyphicon glyphicon-share"></span></button>
+						<button class="btn btn-default msgBtn pull-right"><span class="glyphicon glyphicon-share"></span></button>
 					</form>
+				</div>
 			</div>
 		</div>
 	</div>
 
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="./jquery-1.11.1.min.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="./main.js"></script>
 </body>
