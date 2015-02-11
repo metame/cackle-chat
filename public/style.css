@@ -6,13 +6,37 @@
 .chatPage {
 	height: 100%;
 	margin-top: 1%;
-	border: 1px solid;
+}
+
+#divUserList {
+	background: #eee;
+}
+
+#userList li {
+	display: inline;
+	padding-left: 5px;
+}
+
+#msgList, .msgInput, .msgBtn {
+	margin-top: 2px;
 }
 
 #msgList {
-	margin-top: 1%;
+	padding-left: 10px;
+}
+.usernInput, .msgInput {
+	height: 34px;
+	border-width: 1px;
+	border-radius: 4px;
 }
 
-#chatWindow, #divUserList, #chatInput {
-	border: 1px solid;
+
+
+
+#chatInput {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	border-top: 2px solid;
+	margin: 2px;
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Chat App with Node, Express, Socket.io by Michael Erwin</title>
+	<title>Cackle, a chat app with Node, Express, Socket.io, & Redis by Michael Erwin</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 	<link rel="stylesheet" href="./style.css">
@@ -10,34 +10,37 @@
 	<div class="container-fluid">
 		<div class="col-xs-12 col-md-8">
 			<div class="row userPage">
-				<form class="form-inline">
-				<input class="usernInput form-control" type="text" placeholder="username?" />
-				<button class='btn btn-default userBtn' href="#">Start</button>
+				<form>
+				<input class="usernInput col-xs-10" type="text" placeholder="username?" />
+				<button class='btn btn-default userBtn col-xs-2' href="#">Start</button>
 				</form>
 			</div>
 			<div class="chatPage row">
 				<div id="divUserList" class="col-xs-12">
-					<h4>Chatters</h4>
-					<ul id="userList">
-						<li>meta</li>
-					</ul>
+					<h4>
+						Cacklers
+						<ul id="userList" class="small">
+							<li>meta</li>
+							<li>metoo</li>
+						</ul>
+					</h4>
 				</div>
 				<div id="chatWindow" class="col-xs-12">
 					<ul id="msgList">
 						<li>meta: Hello world!</li>
 					</ul>
 				</div>
-				<div id="chatInput" class="col-xs-12">
-					<form class="form-horizontal">
-						<input class="msgInput form-control" type="text" placeholder="message?" />
-						<button class="btn btn-default msgBtn pull-right"><span class="glyphicon glyphicon-share"></span></button>
-					</form>
-				</div>
 			</div>
 		</div>
 	</div>
+	<div id="chatInput">
+		<form>
+			<input class="msgInput col-xs-10" type="text" placeholder="message?" />
+			<button class="btn btn-default msgBtn col-xs-2"><span class="glyphicon glyphicon-share"></span></button>
+		</form>
+	</div>
 
-    <script src="./jquery-1.11.1.min.js"></script>
+   <script src="./jquery-1.11.1.min.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="./main.js"></script>
 </body>
