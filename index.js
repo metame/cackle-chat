@@ -5,6 +5,9 @@ var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var port = process.env.PORT || 3000;
 
+var redis = require('./lib/redis');
+
+
 // Routing to set static dirname for all files in /public
 app.use(express.static(__dirname + '/public'));
 
@@ -12,9 +15,10 @@ app.use(express.static(__dirname + '/public'));
 
 // Global variables for chat server
 var numUsers = 0;
+var userList;
 
 io.on('connection', function(socket) {
-	console.log('Client connected')
+	console.log('Client connected');
 
 
 
@@ -31,8 +35,20 @@ io.on('connection', function(socket) {
 		console.log( socket.username + ' has joined');
 		console.log('There are now ' + numUsers + ' user(s) on the chat server');
 
+		redis.lpush('users', socket.username, function(err, data){
+    if (err) return callback(err, null);
+  	});
 
-		io.emit('user joined', socket.username);
+  	userList = redis.lrange('users', 0, -1, function(err, data){
+    	if (err) return callback(err, null);
+  	});
+
+  	console.log(userList);
+
+		io.emit('user joined', {
+			user: socket.username,
+			userList: userList
+		});
 	});
 
 	socket.on('chat message', function(msg) {

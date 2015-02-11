@@ -16,7 +16,6 @@ $(function() {
 
 	// Add user
 	var username;
-	var users = [];
 	var $currentInput = $usernInput.focus();
 
 	// Initial environment
@@ -45,10 +44,10 @@ $(function() {
 	}
 
 	// List users in User List
-	function listUsers () {
-		for (var i = 0; i < users.length; i++)
-			if (users[i] !== undefined) {
-				var userLi = '<li>' + users[i] + '</li>';
+	function listUsers (userList) {
+		for (var i = 0; i < userList.length; i++)
+			if (usersList[i] !== undefined) {
+				var userLi = '<li>' + userList[i] + '</li>';
 				$userList.append(userLi);
 			}
 	}
@@ -64,11 +63,10 @@ $(function() {
 		e.preventDefault();
 	});
 
-	socket.on('user joined', function (user) {
-		users.push(user);
-		listUsers();
-		var joinMsg = $('<li>').text(user + ' has joined');
+	socket.on('user joined', function (data) {
+		var joinMsg = $('<li>').text(data.user + ' has joined');
 		$msgList.append(joinMsg);
+		listUsers(data.userList);
 	});
 
 	socket.on('chat message', function (msg) {
@@ -77,11 +75,11 @@ $(function() {
 	});
 
 	socket.on('user left', function (user) {
-		for (var i = 0; i < users.length; i++)
+/*		for (var i = 0; i < users.length; i++)
 			if(users[i] == user) {
 				users[i] = undefined;
 			}
-		listUsers();
+		listUsers();*/
 	});
 
 });
