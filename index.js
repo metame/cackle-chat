@@ -36,7 +36,7 @@ io.on('connection', function(socket) {
 		console.log('There are now ' + numUsers + ' user(s) on the chat server');
 
 		redis.sadd('users', username, function(err, data){
-    if (err) return callback(err, null);
+    	if (err) return callback(err, null);
   	});
 
 		io.emit('user joined', {
@@ -60,9 +60,8 @@ io.on('connection', function(socket) {
 		if (username !== undefined) {
 			numUsers--;
 			console.log('There are now ' + numUsers + ' user(s) on the chat server');
+			redis.srem('users', username);
 		}
-
-		redis.srem('users', username);
 
 		io.emit('user left', {
 			user: username,
