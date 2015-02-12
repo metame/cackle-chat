@@ -9,7 +9,6 @@ $(function() {
 
 	var $userPage = $('.userPage');
 	var $chatPage = $('.chatPage');
-	var $userList = $('#userList');
 	var $msgList = $('#msgList');
 
 	var socket = io();
@@ -42,15 +41,6 @@ $(function() {
 			$msgInput.val('');
 		}
 	}
-
-	// List users in User List
-	function listUsers (userList) {
-		for (var i = 0; i < userList.length; i++)
-			if (usersList[i] !== undefined) {
-				var userLi = '<li>' + userList[i] + '</li>';
-				$userList.append(userLi);
-			}
-	}
 	
 	$('.userBtn').click( function (e) {
 		addUser();
@@ -59,14 +49,13 @@ $(function() {
 
 	$('.msgBtn').click( function (e) {
 		addMsg();
-		// e.stopPropagation();
 		e.preventDefault();
 	});
 
 	socket.on('user joined', function (data) {
 		var joinMsg = $('<li>').text(data.user + ' has joined');
 		$msgList.append(joinMsg);
-		listUsers(data.userList);
+		$('.numUsers').text(data.numUsers);
 	});
 
 	socket.on('chat message', function (msg) {
@@ -74,12 +63,10 @@ $(function() {
 		$msgList.append(msgLi);
 	});
 
-	socket.on('user left', function (user) {
-/*		for (var i = 0; i < users.length; i++)
-			if(users[i] == user) {
-				users[i] = undefined;
-			}
-		listUsers();*/
+	socket.on('user left', function (data) {
+		var leftMsg = $('<li>').text(data.user + ' has left');
+		$msgList.append(leftMsg);
+		$('.numUsers').text(data.numUsers);
 	});
 
 });

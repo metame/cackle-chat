@@ -32,22 +32,16 @@ io.on('connection', function(socket) {
 		socket.username = username; // grabbing client username & storing it in the session
 
 		numUsers ++;
-		console.log( socket.username + ' has joined');
+		console.log( username + ' has joined');
 		console.log('There are now ' + numUsers + ' user(s) on the chat server');
 
-		redis.lpush('users', socket.username, function(err, data){
+		redis.sadd('users', username, function(err, data){
     if (err) return callback(err, null);
   	});
 
-  	userList = redis.lrange('users', 0, -1, function(err, data){
-    	if (err) return callback(err, null);
-  	});
-
-  	console.log(userList);
-
 		io.emit('user joined', {
-			user: socket.username,
-			userList: userList
+			user: username,
+			numUsers: numUsers
 		});
 	});
 
@@ -60,9 +54,20 @@ io.on('connection', function(socket) {
 
 	socket.on('event', function(data){});
 	socket.on('disconnect', function(){
-		console.log( socket.username + ' has left');
+		var username = socket.username;
+		console.log(username + ' has left');
 		console.log('Client disconnected');
-		io.emit('user left', socket.username);
+		if (username !== undefined) {
+			numUsers--;
+			console.log('There are now ' + numUsers + ' user(s) on the chat server');
+		}
+
+		redis.srem('users', username);
+
+		io.emit('user left', {
+			user: username,
+			numUsers: numUsers
+		});
 	});
 });
 
