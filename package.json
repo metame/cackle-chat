@@ -1,13 +1,17 @@
 {
-  "name": "chatapp",
-  "version": "0.0.0",
+  "name": "cackle-chat",
+  "version": "0.0.1",
   "description": "chat app based on Code School's redis chat app & socket.io's example from github",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/metame/cackle-chat.git"
+  },
   "author": "Michael Erwin",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "express": "^4.11.1",
     "redis": "^0.12.1",
