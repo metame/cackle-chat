@@ -1,26 +1,22 @@
 'use strict';
-var express = require('express');
-var app = express();
-var server = require('http').createServer(app);
-var io = require('socket.io')(server);
-var port = process.env.PORT || 3000;
-
-var redis = require('./lib/redis');
+var express = require('express'),
+	app = express(),
+	server = require('http').createServer(app),
+	io = require('socket.io')(server),
+	port = process.env.PORT || 3000,
+	redis = require('./lib/redis');
 
 
 // Routing to set static dirname for all files in /public
 app.use(express.static(__dirname + '/public'));
 
-// Chatroom
+// --------- Chatroom ------------
 
 // Global variables for chat server
-var numUsers = 0;
-var userList;
+let numUsers = 0;
 
-io.on('connection', function(socket) {
+io.on('connection', socket => {
 	console.log('Client connected');
-
-
 
 	// Add user
 		// Steps for adding users
@@ -28,16 +24,16 @@ io.on('connection', function(socket) {
 		// 2. Send username to server - client
 		// 3. username + " has joined" - server
 		// 4. Add username to list - server & client
-	socket.on('add user', function(username) {
+	socket.on('add user', username => {
 		socket.username = username; // grabbing client username & storing it in the session
 
-		numUsers ++;
+		numUsers++;
 		console.log( username + ' has joined');
 		console.log('There are now ' + numUsers + ' user(s) on the chat server');
 
-		redis.sadd('users', username, function(err, data){
-    	if (err) return callback(err, null);
-  	});
+		redis.sadd('users', username, (err, data) => {
+    		if (err) return callback(err, null);
+  		});
 
 		io.emit('user joined', {
 			user: username,
@@ -45,16 +41,16 @@ io.on('connection', function(socket) {
 		});
 	});
 
-	socket.on('chat message', function(msg) {
+	socket.on('chat message', msg => {
 		console.log('message: ' + msg);
 		// io.emit sends event to every client while socket.broadcast.emit except specific client
 		io.emit('chat message', msg);
 	});
 
-
-	socket.on('event', function(data){});
-	socket.on('disconnect', function(){
-		var username = socket.username;
+	socket.on('event', data => {});
+	
+	socket.on('disconnect', () => {
+		let username = socket.username;
 		console.log(username + ' has left');
 		console.log('Client disconnected');
 		if (username !== undefined) {
@@ -71,6 +67,6 @@ io.on('connection', function(socket) {
 });
 
 
-server.listen(port, function(){
+server.listen(port, () => {
 	console.log('Server listening at ' + port);
 });

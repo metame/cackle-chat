@@ -1,5 +1,5 @@
 # Cackle, a Chat app
-Cackle is a chat app using Node.js, Express.js, Socket.io and Redis.
+Cackle is a chat app using Node.js, Express.js, Socket.io and Redis written with ES2015/ES6.
 
 ## Deployment
 1. Make sure [Node](http://nodejs.org/) & [Redis](http://redis.io/download) core packages are installed
@@ -19,6 +19,7 @@ Node dependencies:
 * [Socket.io](https://github.com/Automattic/socket.io)
 * [Express](http://expressjs.com/)
 * [Redis](http://redis.io/)
+* [Babel](http://babeljs.io/)
 
 
 ## Credits

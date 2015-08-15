@@ -1,38 +1,34 @@
 'use strict';
 
-
-$(function() {
+$(function () {
 
 	// Variable list
-	var $usernInput = $('.usernInput');
-	var $msgInput = $('.msgInput');
-
-	var $userPage = $('.userPage');
-	var $chatPage = $('.chatPage');
-	var $msgList = $('#msgList');
+	var $usernInput = $('.usernInput'),
+	    $msgInput = $('.msgInput'),
+	    $userPage = $('.userPage'),
+	    $chatPage = $('.chatPage'),
+	    $msgList = $('#msgList');
 
 	var socket = io();
 
 	// Add user
-	var username;
-	var $currentInput = $usernInput.focus();
+	var username = undefined,
+	    $currentInput = $usernInput.focus();
 
 	// Initial environment
 
-	
-
-	function addUser () {
+	var addUser = function addUser() {
 		username = $usernInput.val().trim();
-		
+
 		if (username.length > 0) {
 			$userPage.fadeOut();
 			$chatPage.show();
 			$currentInput = $msgInput.focus();
 			socket.emit('add user', username);
 		}
-	}
+	};
 
-	function addMsg () {
+	var addMsg = function addMsg() {
 		var message = $msgInput.val().trim();
 		if (!username) {
 			alert('Enter username first before sending a message!');
@@ -40,14 +36,14 @@ $(function() {
 			socket.emit('chat message', message);
 			$msgInput.val('');
 		}
-	}
-	
-	$('.userBtn').click( function (e) {
+	};
+
+	$('.userBtn').click(function (e) {
 		addUser();
 		e.preventDefault();
 	});
 
-	$('.msgBtn').click( function (e) {
+	$('.msgBtn').click(function (e) {
 		addMsg();
 		e.preventDefault();
 	});
@@ -68,5 +64,5 @@ $(function() {
 		$msgList.append(leftMsg);
 		$('.numUsers').text(data.numUsers);
 	});
-
 });
+//# sourceMappingURL=.b/main.js.map
