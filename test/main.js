@@ -2,8 +2,8 @@
 var should = require('should'),
     io = require('socket.io-client'),
     config = require('../config');
-    
-var socketURL = '0.0.0.0:8080';
+
+var socketURL = config.host + ':' + config.port;
 
 var options ={
     transports: ['websocket'],
