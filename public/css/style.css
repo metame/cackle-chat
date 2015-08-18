@@ -8,7 +8,7 @@
 	margin-top: 1%;
 }
 
-#divUserList {
+.userList {
 	background: #eee;
 }
 
@@ -19,6 +19,11 @@
 #msgList {
 	padding-left: 10px;
 }
+
+#msgList li:nth-child(odd) {
+	background: #eee;
+}
+
 .usernInput, .msgInput {
 	height: 34px;
 	border-width: 1px;

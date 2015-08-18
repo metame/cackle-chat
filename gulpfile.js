@@ -5,20 +5,20 @@ var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 
 gulp.task("transpile", function () {
-  return gulp.src("public/**/*.es6")
+  return gulp.src("public/js/**/*.es6")
     .pipe(sourcemaps.init())
     .pipe(babel())
-    .pipe(sourcemaps.write(".b"))
-    .pipe(gulp.dest("public"));
+    .pipe(sourcemaps.write("../maps"))
+    .pipe(gulp.dest("./public/js/dist"));
 });
 
-gulp.task("minify", ["transpile"], function() {
-    return gulp.src("public/**/*.js")
+gulp.task("minify", ["transpile"], function () {
+  return gulp.src("public/js/**/*.js")
     .pipe(sourcemaps.init())
     .pipe(rename('main.min.js'))
     .pipe(uglify())
-    .pipe(sourcemaps.write("."))
-    .pipe(gulp.dest("public"));
+    .pipe(sourcemaps.write("../maps"))
+    .pipe(gulp.dest("public/js/dist"));
 });
 
 gulp.task("default", ["minify"]);
