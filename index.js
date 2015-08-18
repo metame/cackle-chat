@@ -3,7 +3,7 @@ var express = require('express'),
 	app = express(),
 	server = require('http').createServer(app),
 	io = require('socket.io')(server),
-	port = process.env.PORT || 3000,
+	config = require('./config'),
 	redis = require('./lib/redis');
 
 
@@ -67,6 +67,6 @@ io.on('connection', socket => {
 });
 
 
-server.listen(port, () => {
-	console.log('Server listening at ' + port);
+server.listen(config.port, () => {
+	console.log('Server listening at ' + config.host + ':' + config.port);
 });
