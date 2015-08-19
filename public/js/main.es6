@@ -51,7 +51,7 @@ $(() => {
 
   // Socket event handlers
   socket.on('user joined', data => {
-    let joinMsg = $('<li>').text('<em>' + data.user + ' has joined</em>');
+    let joinMsg = '<li><em>' + data.user + ' has joined</em></li>';
     $msgList.append(joinMsg);
     $('.numUsers').text(data.numUsers);
   });
