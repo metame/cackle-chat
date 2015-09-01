@@ -8,34 +8,41 @@
 </head>
 <body>
 
-	<div class="container-fluid">
+	<div class="container-fluid page">
 		<div class="row">
-			<div class="col-xs-12 col-sm-4">
-				<h4>Cacklers <span class="numUsers small">0</span></h4>
-				<div class="userList">
-					<ul>
-						<li>meta</li>
-					</ul>
+			<div class="col-xs-12 col-sm-4 userPage">
+				<div class="row users_container">
+					<h4>Cacklers <span class="numUsers small">0</span></h4>
+					<div class="userList">
+						<ul>
+							<li>meta</li>
+						</ul>
+					</div>
+				</div>
+				<div class="row rooms_container">
+					<div class="rooms">
+						<h5>Room 1</h5>
+					</div>
 				</div>
 			</div>
-
+			
 			<!-- Main Chat Window	 -->
-			<div class="col-xs-12 col-sm-8">
-				<div class="row userPage">
-					<form>
-					<input class="usernInput col-xs-10" type="text" placeholder="username?" />
-					<button class='btn btn-default userBtn col-xs-2' href="#">Start</button>
+			<div class="col-xs-12 col-sm-8 chatPage">
+				<div class="row">
+					<form class="login-form">
+						<input class="usernInput col-xs-10" type="text" placeholder="username?" />
+						<button class='btn btn-default userBtn col-xs-2' href="#">Start</button>
 					</form>
 				</div>
-
-				<div class="chatPage row">
+	
+				<div class="row">
 					<div id="chatWindow" class="col-xs-12">
 						<ul id="msgList">
 							<li>meta: Hello world!</li>
 						</ul>
 					</div>
 				</div>
-
+	
 			</div>
 		</div>
 	</div>
@@ -47,7 +54,7 @@
 		</form>
 	</div>
 
-  <script src="./js/jquery-1.11.1.min.js"></script>
+  	<script src="./js/jquery-1.11.1.min.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="./js/dist/main.js"></script>
 	

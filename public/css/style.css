@@ -1,39 +1,47 @@
+html {
+  min-height: 100%; }
+
+body {
+  min-height: 100%; }
+
+.page {
+  position: relative;
+  height: 100%; }
+
 .userPage {
-	height: 100%;
-	margin-top: 1%;
-}
+  height: 100%;
+  background: #D8D7C3; }
 
 .chatPage {
-	height: 100%;
-	margin-top: 1%;
-}
+  height: 100%;
+  background: #166678; }
 
 .userList {
-	background: #eee;
-}
+  background: #eee; }
+
+.users_container, .rooms_container {
+  height: 100%; }
+
+#chatWindow {
+  margin-top: 10px; }
 
 #msgList, .msgInput, .msgBtn {
-	margin-top: 2px;
-}
+  margin-top: 2px; }
 
 #msgList {
-	padding-left: 10px;
-}
+  padding-left: 10px; }
 
 #msgList li:nth-child(odd) {
-	background: #eee;
-}
+  background: #eee; }
 
 .usernInput, .msgInput {
-	height: 34px;
-	border-width: 1px;
-	border-radius: 4px;
-}
+  height: 34px;
+  border-width: 1px;
+  border-radius: 4px; }
 
 #chatInput {
-	position: fixed;
-	bottom: 0;
-	width: 100%;
-	border-top: 2px solid;
-	margin: 2px;
-}
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  border-top: 2px solid;
+  margin: 2px; }

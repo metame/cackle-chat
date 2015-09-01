@@ -3,7 +3,8 @@
 $(function () {
 
   // Set constants
-  var $usernInput = $('.usernInput'),
+  var $loginForm = $('.login-form'),
+      $usernInput = $('.usernInput'),
       $msgInput = $('.msgInput'),
       $userPage = $('.userPage'),
       $chatPage = $('.chatPage'),
@@ -19,7 +20,7 @@ $(function () {
     username = $usernInput.val().trim();
 
     if (username.length > 0) {
-      $userPage.fadeOut();
+      $loginForm.fadeOut();
       $chatPage.show();
       $currentInput = $msgInput.focus();
       socket.emit('add user', username);
@@ -50,7 +51,7 @@ $(function () {
 
   // Socket event handlers
   socket.on('user joined', function (data) {
-    var joinMsg = $('<li>').text('<em>' + data.user + ' has joined</em>');
+    var joinMsg = '<li><em>' + data.user + ' has joined</em></li>';
     $msgList.append(joinMsg);
     $('.numUsers').text(data.numUsers);
   });
@@ -66,4 +67,3 @@ $(function () {
     $('.numUsers').text(data.numUsers);
   });
 });
-//# sourceMappingURL=../maps/main.js.map

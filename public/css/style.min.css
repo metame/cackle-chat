@@ -1,0 +1,2 @@
+.chatPage,.page,.rooms_container,.userPage,.users_container{height:100%}body,html{min-height:100%}.page{position:relative}.userPage{background:#D8D7C3}.chatPage{background:#166678}#msgList li:nth-child(odd),.userList{background:#eee}#chatWindow{margin-top:10px}#msgList,.msgBtn,.msgInput{margin-top:2px}#msgList{padding-left:10px}.msgInput,.usernInput{height:34px;border-width:1px;border-radius:4px}#chatInput{position:fixed;bottom:0;width:100%;border-top:2px solid;margin:2px}
+/*# sourceMappingURL=css/maps/style.min.css.map */

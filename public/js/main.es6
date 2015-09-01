@@ -4,7 +4,8 @@
 $(() => {
 
   // Set constants
-  const $usernInput = $('.usernInput'),
+  const $loginForm = $('.login-form'),
+    $usernInput = $('.usernInput'),
     $msgInput = $('.msgInput'),
     $userPage = $('.userPage'),
     $chatPage = $('.chatPage'),
@@ -20,7 +21,7 @@ $(() => {
     username = $usernInput.val().trim();
     
     if (username.length > 0) {
-      $userPage.fadeOut();
+      $loginForm.fadeOut();
       $chatPage.show();
       $currentInput = $msgInput.focus();
       socket.emit('add user', username);
