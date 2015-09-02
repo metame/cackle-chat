@@ -20,14 +20,14 @@ gulp.task("js", function () {
 });
 
 gulp.task('sass', function () {
-    gulp.src('public/css/*.scss')
-        .pipe(watch('public/css/*.scss'))
+    gulp.src(['public/css/*.scss','!public/css/_*.scss'])
+        .pipe(watch(['public/css/*.scss','public/css/_.scss']))
         .pipe(sourcemaps.init())
         .pipe(sass())
         .pipe(gulp.dest('public/css'))
         .pipe(minifyCSS())
-        .pipe(rename('style.min.css'))
-        .pipe(sourcemaps.write('css/maps'))
+        .pipe(rename('main.min.css'))
+        .pipe(sourcemaps.write('maps'))
         .pipe(gulp.dest('public/css/'));
 });
 

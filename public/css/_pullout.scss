@@ -1,0 +1,38 @@
+.container_pullout {
+    display: relative;
+    float: left;
+	height: 100%;
+	width: 25%;
+	top: 0;
+}
+
+.container_users {
+	height: 70%;
+	color: $light;
+	background-color: $mid;
+	
+	h1 {
+	    margin-top: 0;
+	}
+}
+
+.container_rooms {
+	height: 30%;
+	bottom: 0;
+	color: $light;
+	background-color: $dark;
+	
+    h3 {
+        margin-top: 0;
+    }
+    
+    .div_room {
+        height: 50px;
+        width: 50px;
+        position: relative;
+        float: left;
+        border: 1px solid $light;
+        overflow: hidden;
+    }
+}
+

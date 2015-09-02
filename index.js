@@ -4,11 +4,20 @@ var express = require('express'),
 	server = require('http').createServer(app),
 	io = require('socket.io')(server),
 	port = process.env.PORT || 3000,
-	redis = require('./lib/redis');
+	redis = require('./lib/redis'),
+	path = require('path'),
+	routes = require('./routes');
 
 
 // Routing to set static dirname for all files in /public
 app.use(express.static(__dirname + '/public'));
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
+// load routes
+app.use('/', routes);
 
 // --------- Chatroom ------------
 

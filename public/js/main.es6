@@ -4,12 +4,11 @@
 $(() => {
 
   // Set constants
-  const $loginForm = $('.login-form'),
-    $usernInput = $('.usernInput'),
-    $msgInput = $('.msgInput'),
-    $userPage = $('.userPage'),
-    $chatPage = $('.chatPage'),
-    $msgList = $('#msgList');
+  const $loginPage = $('.container_login'),
+    $usernInput = $('.input_username'),
+    $msgInput = $('.input_msg'),
+    $chatPage = $('.container_chat'),
+    $msgList = $('.list_msg');
 
   var socket = io();
 
@@ -21,7 +20,7 @@ $(() => {
     username = $usernInput.val().trim();
     
     if (username.length > 0) {
-      $loginForm.fadeOut();
+      $loginPage.fadeOut();
       $chatPage.show();
       $currentInput = $msgInput.focus();
       socket.emit('add user', username);
@@ -40,12 +39,12 @@ $(() => {
   };
   
   // Input Event handlers
-  $('.userBtn').click( e => {
+  $('.btn_username').click( e => {
     addUser();
     e.preventDefault();
   });
 
-  $('.msgBtn').click( e => {
+  $('.btn_msg').click( e => {
     addMsg();
     e.preventDefault();
   });
@@ -54,7 +53,7 @@ $(() => {
   socket.on('user joined', data => {
     let joinMsg = '<li><em>' + data.user + ' has joined</em></li>';
     $msgList.append(joinMsg);
-    $('.numUsers').text(data.numUsers);
+    $('.user-count').text(data.numUsers);
   });
 
   socket.on('chat message', msg => {
@@ -65,7 +64,7 @@ $(() => {
   socket.on('user left', data => {
     let leftMsg = $('<li>').text(data.user + ' has left');
     $msgList.append(leftMsg);
-    $('.numUsers').text(data.numUsers);
+    $('.user-count').text(data.numUsers);
   });
 
 });

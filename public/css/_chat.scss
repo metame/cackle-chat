@@ -1,0 +1,25 @@
+.container_chat {
+    position: relative;
+    float: left;
+    height: 100%;
+    width: 75%;
+    color: $dark;
+}
+
+.div_msg-list {
+    background-color: $base;
+    height: 100%;
+    
+    h3 {
+        margin-top: 0;
+    }
+}
+
+.div_msg-input {
+	position: fixed;
+	bottom: 0;
+	left: 25%;
+	width: 75%;
+	border-top: 2px solid;
+	background-color: $light;
+}

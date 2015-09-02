@@ -1,0 +1,81 @@
+body {
+  height: 100vh;
+  margin: 0; }
+
+.page {
+  position: relative;
+  height: 100%;
+  text-transform: lowercase; }
+
+form {
+  margin: 0; }
+
+input, button {
+  height: 34px;
+  margin: 2px;
+  border-width: 1px;
+  border-radius: 5px; }
+
+button {
+  min-width: 60px;
+  color: #7DB9B3;
+  background-color: #166678;
+  font-weight: bold; }
+
+.container_pullout {
+  display: relative;
+  float: left;
+  height: 100%;
+  width: 25%;
+  top: 0; }
+
+.container_users {
+  height: 70%;
+  color: #7DB9B3;
+  background-color: #166678; }
+  .container_users h1 {
+    margin-top: 0; }
+
+.container_rooms {
+  height: 30%;
+  bottom: 0;
+  color: #7DB9B3;
+  background-color: #0E2E3B; }
+  .container_rooms h3 {
+    margin-top: 0; }
+  .container_rooms .div_room {
+    height: 50px;
+    width: 50px;
+    position: relative;
+    float: left;
+    border: 1px solid #7DB9B3;
+    overflow: hidden; }
+
+.container_chat {
+  display: relative;
+  float: left;
+  height: 100%;
+  width: 75%;
+  color: #0E2E3B; }
+
+.div_msg-list {
+  background-color: #D8D7C3;
+  height: 100%; }
+  .div_msg-list h3 {
+    margin-top: 0; }
+
+.div_msg-input {
+  position: fixed;
+  bottom: 0;
+  left: 25%;
+  width: 75%;
+  border-top: 2px solid;
+  background-color: #7DB9B3; }
+
+.container_login {
+  height: 100%;
+  width: 75%;
+  position: fixed;
+  left: 25%;
+  z-index: 1;
+  background-color: rgba(200, 200, 200, 0.5); }
