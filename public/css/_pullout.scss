@@ -4,35 +4,37 @@
 	height: 100%;
 	width: 25%;
 	top: 0;
+	color: $menu;
 }
 
 .container_users {
 	height: 70%;
-	color: $light;
-	background-color: $mid;
+	background-color: $accent;
 	
-	h1 {
-	    margin-top: 0;
+	.div_users {
+	    padding-top: 38px;
+	    @include margin-left;
 	}
 }
 
 .container_rooms {
 	height: 30%;
 	bottom: 0;
-	color: $light;
 	background-color: $dark;
 	
-    h3 {
-        margin-top: 0;
-    }
-    
-    .div_room {
-        height: 50px;
-        width: 50px;
-        position: relative;
-        float: left;
-        border: 1px solid $light;
-        overflow: hidden;
-    }
+	.div_rooms {
+	    @include margin-left;
+        
+        .div_room {
+            height: 50px;
+            width: 50px;
+            position: relative;
+            float: left;
+            border: 2px solid $menu;
+            margin-right: 2px;
+            overflow: hidden;
+            text-align: center;
+        }
+	}
 }
 

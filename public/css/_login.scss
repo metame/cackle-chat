@@ -1,8 +1,24 @@
 .container_login {
     height: 100%;
     width: 75%;
-    position: fixed;
+    position: fixed; 
     left: 25%;
-    z-index: 1;
-    background-color: rgba(200,200,200,.5);
+    z-index: 2;
+    background-color: rgba(200,200,200,.9);
+    
+    .form_login { 
+        padding-left: 10px; 
+    }
+    
+    .input_username {
+        width: 25%;
+        min-width: 200px;
+    }
+    
+    .btn_username {
+        color: $menu;
+        background-color: $accent;
+        font-family: courier;
+    }
+    
 }

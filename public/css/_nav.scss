@@ -1,0 +1,17 @@
+nav {
+    @include box-shadow;
+    position: fixed;
+    top: 0;
+    background-color: $base;
+    width: 100%;
+    z-index: 1;
+    
+    h1 { 
+        @include margin-left;
+        font-family: 'Lobster', cursive;
+        color: $logo;
+        text-transform: none;
+        margin-top: 5.5px;
+        margin-bottom: 5.5px; 
+    }
+}

@@ -4,15 +4,13 @@
     height: 100%;
     width: 75%;
     color: $dark;
+    
+    div { padding-left: 10px; }
 }
 
 .div_msg-list {
     background-color: $base;
     height: 100%;
-    
-    h3 {
-        margin-top: 0;
-    }
 }
 
 .div_msg-input {
@@ -21,5 +19,16 @@
 	left: 25%;
 	width: 75%;
 	border-top: 2px solid;
-	background-color: $light;
+	background-color: $logo;
+	
+	.input_msg {
+    	width: (1108%/12);
+	}
+	
+	.btn_msg {
+	    font-family: 'Lobster', cursive;
+	    line-height: 1em;
+    	color: $logo;
+	    background-color: $base;
+	}
 }

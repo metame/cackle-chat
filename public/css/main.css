@@ -5,64 +5,86 @@ body {
 .page {
   position: relative;
   height: 100%;
-  text-transform: lowercase; }
+  text-transform: lowercase;
+  font-family: courier; }
+
+h3 {
+  margin-top: 0;
+  padding-top: 10px; }
 
 form {
   margin: 0; }
 
 input, button {
   height: 34px;
-  margin: 2px;
+  margin: 2px 0.16667%;
+  padding: 0.41667%;
   border-width: 1px;
   border-radius: 5px; }
 
 button {
   min-width: 60px;
-  color: #7DB9B3;
-  background-color: #166678;
+  width: 5%;
   font-weight: bold; }
+
+nav {
+  box-shadow: 0px 2px 2px #444;
+  position: fixed;
+  top: 0;
+  background-color: #DFE0D4;
+  width: 100%;
+  z-index: 1; }
+  nav h1 {
+    margin-left: 10px;
+    font-family: 'Lobster', cursive;
+    color: #FF5335;
+    text-transform: none;
+    margin-top: 5.5px;
+    margin-bottom: 5.5px; }
 
 .container_pullout {
   display: relative;
   float: left;
   height: 100%;
   width: 25%;
-  top: 0; }
+  top: 0;
+  color: #FFCD5D; }
 
 .container_users {
   height: 70%;
-  color: #7DB9B3;
-  background-color: #166678; }
-  .container_users h1 {
-    margin-top: 0; }
+  background-color: #3E92A3; }
+  .container_users .div_users {
+    padding-top: 38px;
+    margin-left: 10px; }
 
 .container_rooms {
   height: 30%;
   bottom: 0;
-  color: #7DB9B3;
-  background-color: #0E2E3B; }
-  .container_rooms h3 {
-    margin-top: 0; }
-  .container_rooms .div_room {
-    height: 50px;
-    width: 50px;
-    position: relative;
-    float: left;
-    border: 1px solid #7DB9B3;
-    overflow: hidden; }
+  background-color: #353940; }
+  .container_rooms .div_rooms {
+    margin-left: 10px; }
+    .container_rooms .div_rooms .div_room {
+      height: 50px;
+      width: 50px;
+      position: relative;
+      float: left;
+      border: 2px solid #FFCD5D;
+      margin-right: 2px;
+      overflow: hidden;
+      text-align: center; }
 
 .container_chat {
-  display: relative;
+  position: relative;
   float: left;
   height: 100%;
   width: 75%;
-  color: #0E2E3B; }
+  color: #353940; }
+  .container_chat div {
+    padding-left: 10px; }
 
 .div_msg-list {
-  background-color: #D8D7C3;
+  background-color: #DFE0D4;
   height: 100%; }
-  .div_msg-list h3 {
-    margin-top: 0; }
 
 .div_msg-input {
   position: fixed;
@@ -70,12 +92,28 @@ button {
   left: 25%;
   width: 75%;
   border-top: 2px solid;
-  background-color: #7DB9B3; }
+  background-color: #FF5335; }
+  .div_msg-input .input_msg {
+    width: 92.33333%; }
+  .div_msg-input .btn_msg {
+    font-family: 'Lobster', cursive;
+    line-height: 1em;
+    color: #FF5335;
+    background-color: #DFE0D4; }
 
 .container_login {
   height: 100%;
   width: 75%;
   position: fixed;
   left: 25%;
-  z-index: 1;
-  background-color: rgba(200, 200, 200, 0.5); }
+  z-index: 2;
+  background-color: rgba(200, 200, 200, 0.9); }
+  .container_login .form_login {
+    padding-left: 10px; }
+  .container_login .input_username {
+    width: 25%;
+    min-width: 200px; }
+  .container_login .btn_username {
+    color: #FFCD5D;
+    background-color: #3E92A3;
+    font-family: courier; }

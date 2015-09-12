@@ -1,7 +1,16 @@
-$base: #D8D7C3;
-$light: #7DB9B3;
-$mid: #166678;
-$dark: #0E2E3B;
+$base: #DFE0D4;
+$logo: #FF5335;
+$accent: #3E92A3;
+$dark: #353940;
+$menu: #FFCD5D; 
+ 
+@mixin margin-left {
+	margin-left: 10px;
+}
+
+@mixin box-shadow($color: #444) {
+	box-shadow: 0px 2px 2px $color;
+}
 
 body { height: 100vh; margin: 0; }
 
@@ -9,29 +18,32 @@ body { height: 100vh; margin: 0; }
 	position: relative;
 	height: 100%;
 	text-transform: lowercase;
+	font-family: courier;
 }
+
+h3 { margin-top: 0; padding-top: 10px;}
 
 form { margin: 0; }
 
 input {
 	height: 34px;
-	margin: 2px;
+	margin: 2px (2%/12);
+	padding: (5%/12);
 	border-width: 1px;
-	border-radius: 5px;
+	border-radius: 5px; 
 }
 
 button {
 	@extend input;
 	min-width: 60px;
-	color: $light;
-	background-color: $mid;
+	width: 5%;
 	font-weight: bold;
-}
+} 
 
-@import 'pullout';
+@import 'nav';
+
+@import 'pullout'; 
 
 @import 'chat'; 
 
 @import 'login';
-
-

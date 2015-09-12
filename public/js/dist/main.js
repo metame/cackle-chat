@@ -20,6 +20,7 @@ $(function () {
 
     if (username.length > 0) {
       $loginPage.fadeOut();
+      $('nav').css({ 'width': '25%', 'z-index': '0' });
       $chatPage.show();
       $currentInput = $msgInput.focus();
       socket.emit('add user', username);
