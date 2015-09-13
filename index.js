@@ -24,6 +24,17 @@ app.use('/', routes);
 // Global variables for chat server
 let numUsers = 0;
 
+// clean up users in db in case redis server fails
+redis.smembers('users', (err, data) => {
+	if(err) throw err;
+	let users = data;
+	if(users[0]){
+		for(let user of users) {
+			redis.srem('users',user);
+		}
+	}
+});
+
 io.on('connection', socket => {
 	console.log('Client connected');
 	
