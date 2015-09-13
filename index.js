@@ -26,7 +26,7 @@ let numUsers = 0;
 
 io.on('connection', socket => {
 	console.log('Client connected');
-
+	
 	// Add user
 		// Steps for adding users
 		// 1. Define username - client
@@ -66,12 +66,12 @@ io.on('connection', socket => {
 			numUsers--;
 			console.log('There are now ' + numUsers + ' user(s) on the chat server');
 			redis.srem('users', username);
+			
+			io.emit('user left', {
+				user: username,
+				numUsers: numUsers
+			});
 		}
-
-		io.emit('user left', {
-			user: username,
-			numUsers: numUsers
-		});
 	});
 });
 

@@ -1,11 +1,13 @@
 .container_pullout
   .container_users
     .div_users
-      h3 <span class="users-count"></span>Users in #{room}
+      h3 <span class="users-count"></span> <span class="users-word">users</span> in #{room}
       ul.list_users
-        li meta
-        li metoo
-        li everyone
+        if users[0]
+          each user in users
+            li= user
+        else
+          li.empty no one here yet!
   .container_rooms
     .div_rooms
       h3 Chat Rooms

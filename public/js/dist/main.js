@@ -7,7 +7,8 @@ $(function () {
       $usernInput = $('.input_username'),
       $msgInput = $('.input_msg'),
       $chatPage = $('.container_chat'),
-      $msgList = $('.list_msg');
+      $msgList = $('.list_msg'),
+      $userList = $('.list_users');
 
   var socket = io();
 
@@ -49,11 +50,23 @@ $(function () {
     e.preventDefault();
   });
 
+  // define fn to update users-count & users-word
+  var updateUsers = function updateUsers(numUsers) {
+    $('.users-count').text(numUsers);
+    if (numUsers == 1) {
+      $('.users-word').text('user');
+    } else {
+      $('.users-word').text('users');
+    }
+  };
+
   // Socket event handlers
   socket.on('user joined', function (data) {
+    $('.empty').remove();
     var joinMsg = '<li><em>' + data.user + ' has joined</em></li>';
     $msgList.append(joinMsg);
-    $('.user-count').text(data.numUsers);
+    $userList.append('<li>' + data.user + '</li>');
+    updateUsers(data.numUsers);
   });
 
   socket.on('chat message', function (msg) {
@@ -62,8 +75,9 @@ $(function () {
   });
 
   socket.on('user left', function (data) {
-    var leftMsg = $('<li>').text(data.user + ' has left');
+    var leftMsg = '<li><em>' + data.user + ' has left</em></li>';
     $msgList.append(leftMsg);
-    $('.user-count').text(data.numUsers);
+    $("ul.list_users > li:contains('" + data.user + "')").remove();
+    updateUsers(data.numUsers);
   });
 });
